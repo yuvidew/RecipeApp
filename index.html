@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/regular.min.css" integrity="sha512-RvQxwf+3zJuNwl4e0sZjQeX7kUa3o82bDETpgVCH2RiwYSZVDdFJ7N/woNigN/ldyOOoKw8584jM4plQdt8bhA==" crossorigin="anonymous" referrerpolicy="no-referrer" /><script src="https://kit.fontawesome.com/f7fe29f0bc.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="https://www.pngall.com/wp-content/uploads/8/Cooking-Recipe.png" type="image/png">
+    <title>Recipe App</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+        * {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+        outline: none;
+        border: none;
+        text-decoration: none;
+        -webkit-transition: .2s linear;
+        transition: .2s linear;
+        }
+
+        input::placeholder{
+            color: #4a4b4b;
+        }
+
+        html {
+        font-size: 62.5%;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url(https://news.itmo.ru/images/news_trans/big/p10476.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        button{
+            cursor: pointer;
+        }
+        section{
+            width: 95rem;
+            margin: 5rem 0;
+            padding: 1.5rem;
+            border-radius: .5rem;
+
+        }
+        section .searchbox{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        section .searchbox input{
+            accent-color: #f2c80a;
+            padding: 1rem 1.5rem;
+            background: transparent;
+            width: 78%;
+        }
+        
+        section .searchbox button{
+            border-radius: .8rem;
+            padding: 1rem 1.5rem;
+            width: 32%;
+            height: 100%;
+            background: #f2c80a;
+        }
+
+        .conte{
+            background-color: #ffff;
+            width: 100%;
+            height: 100%;
+            padding: 1rem ;
+            display: flex;
+            align-items: center;
+        }
+        
+        .conte .left{
+            width: 40%;
+            height: 100%;
+        }
+
+        .conte .left .imgbox{
+            width: 100%;
+            height: 100%;
+        }
+
+        .conte .left .imgbox img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thesearchboxcot{
+            padding: 1rem;
+            width: 40rem;
+            background-color: rgb(241, 241, 240);
+            border-radius: .8rem;
+            margin: auto;
+            margin-bottom: 2rem;
+            box-shadow: 0 1.25em 1.8em rgba(163, 164, 169, 0.25);
+        }
+
+        .conte .right{
+            position: relative;
+            width: 60%;
+            height: 100%;
+        }
+
+        .conte .right .textbox{
+            padding: 1rem;
+            margin: auto;
+            position: absolute;
+            top: 0;
+            left: 2rem;
+            width: 90%;
+            height: 80%;
+            background-color: #fff;
+        }
+
+        .conte .right button{
+            position:absolute ;
+            bottom: 1rem;
+            z-index: 2;
+        }
+
+        .conte .right .textbox ul{
+            list-style: none;
+            font-size: 1.3rem;
+        }
+        
+        .conte .right h1{
+            color: #101010;
+            font-size: 3rem;
+        }
+        
+        .conte .right h1 > span{
+            color: #f2c80a;
+            padding-bottom: -2rem;
+            border-bottom: 2px solid #101010;
+        }
+        
+        #result{
+            height: 40rem;
+            background: #ffff;
+        }
+        
+        
+        #resultsection{
+            display: none;
+            padding: 1rem;
+            background-color: #fff;
+            box-shadow: 0 1.25em 1.8em rgba(163, 164, 169, 0.25);
+        }
+
+        #resultsection button{
+            margin: auto;
+            display: block;
+            background-color: #f2c80a;
+            color: #101010;
+            padding: .6rem 1.4rem;
+        }
+
+        .textbox button i{
+            padding: 0rem .5rem;
+        }
+
+        pre{
+            width: 100%;
+            height: 100%;
+            white-space: pre-wrap;
+            word-wrap: break-world;
+            font-size: 1.2rem;
+        }
+
+        .instrconheading{
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            font-weight: 400;
+        }
+
+        .instrconheading span{
+            color: #f2c80a;
+        }
+
+        .instrcon{
+            margin-top: 0;
+            height: 30rem;
+            overflow-y: scroll;
+        }
+        
+        .thelist{
+            height: 30rem;
+            overflow-y: scroll;
+
+        }
+
+        #inglist{
+            height: 35em;
+        }
+
+        .instrcon::-webkit-scrollbar,
+        .thelist::-webkit-scrollbar{
+            width: 0rem;
+        }
+
+        .instrcon::-webkit-scrollbar,
+        .thelist::-webkit-scrollbar{
+            width: 1rem;
+            height: .3rem;
+        }
+
+        .instrcon::-webkit-scrollbar-track,
+        .thelist::-webkit-scrollbar-track{
+            background: transparent;
+        }
+
+        .instrcon::-webkit-scrollbar-thumb,
+        .thelist::-webkit-scrollbar-thumb {
+        background: #f2c80a;
+        }
+
+        .therecipelist ul{
+            list-style: none;
+            font-size: 1.3rem;   
+            line-height: 3rem;
+        }
+
+        #inglistbox{
+            background: #ffff;
+        }
+
+        
+        .right{
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+        }
+
+        #homebox{
+            display: flex;
+            align-items: center;
+        }
+
+        @media (max-width : 576px){
+            .conte{
+                flex-direction: column;
+                padding: 0;
+            }
+
+            .conte .left{
+                width: 100%;
+                height: 30%;
+            }
+
+            .conte .right{
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="thesearchboxcot">
+            <div class="searchbox">
+                <input type="text" placeholder="search your dish recipe...." id="inputbox">
+                <button id="searchbtn">Search</button>
+            </div>
+        </div>
+        <div id="resultsection" >
+            <div id="result">
+                <div class = "conte" style="height: 100%; ">
+                    <div class="left" id="leftbox">
+
+                    </div>
+                    <div class="right">
+                        <div class="textbox" id="homebox"></div>
+                        <div class="textbox" id="inglistbox"></div>
+                        <div class="textbox" id="makingsteps"></div>
+                    </div>
+                </div>
+            </div>
+            <button onclick="changeslide()" id="themainbtn">See the next page</button>
+        </div>
+    </section>
+
+    <script>
+
+
+        
+        let themainbtn = document.getElementById("themainbtn")
+        let homeboxname = document.getElementById("homebox")
+        let leftbox = document.getElementById("leftbox")
+        let inglistbox = document.getElementById("inglistbox")
+        let makingsteps = document.getElementById("makingsteps")
+        let result = document.getElementById("result");
+        let inputbox = document.getElementById("inputbox")
+        let searchbtn = document.getElementById("searchbtn")
+        let resultsection = document.getElementById("resultsection")
+        let url = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+        
+        searchbtn.addEventListener("click", () =>{
+            fetch(url + inputbox.value)
+            .then( response => response.json())
+        .then(data =>{
+            let mymeal = data.meals[0];
+            let count = 1;
+            let ingredientlist = [];
+            let ingredient = "";
+            let measure = "";
+            for(let i in mymeal){
+                if(i.startsWith("strIngredient") && mymeal[i]){
+                    ingredient = mymeal[i];
+                    measure = mymeal[`strMeasure` + count];
+                    count += 1
+                    ingredientlist.push(`${measure} ${ingredient}`)
+                }
+            }
+            
+            homeboxname.innerHTML = `<h1>The Delicious food is <span>${mymeal.strMeal}</span></h1>`
+
+            leftbox.innerHTML = `
+            <div class = "imgbox">
+                <img src=${mymeal.strMealThumb}>
+            </div>`
+
+            inglistbox.innerHTML = `
+            <h2 class="instrconheading"><span>${mymeal.strMeal}</span> Recipe ingredient</h2>
+            <div class = "thelist">
+                <ul id="inglist">
+                </ul>
+            </div>`
+
+            makingsteps.innerHTML = `
+            <h2 class="instrconheading">Instructions of <span>${mymeal.strMeal}</span></h2>
+            <div class="instrcon">
+                <pre id="instructions">${mymeal.strInstructions}</pre>
+                </div> `
+                
+                const inglist = document.getElementById("inglist")
+                let theinglist = ingredientlist.map(i =>{
+                    return`<li>${i}</li>`
+                })
+                console.log(theinglist.join(""))
+                
+                inglist.innerHTML = theinglist.join("")    
+            })
+            
+            resultsection.style.display = "block"
+        })
+        
+        let slides = document.querySelectorAll(".right div");
+        slides.forEach((slides, index) => {
+            slides.style.top = `${index*100}%`
+        })
+
+        let count = 0
+        
+        const changeslide = () =>{
+            if(count < 2){
+                count++
+                slideimg()
+            }else if(count === 2){
+                count = 0
+                slideimg()
+            }
+            
+        }
+    
+        const slideimg = () => {
+            slides.forEach(slides => {
+                slides.style.transform = `translatey(-${count*125}%)`
+            })
+        }
+    </script>
+</body>
+</html>
